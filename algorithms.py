@@ -2,63 +2,6 @@ import numpy as np
 import copy
 import matplotlib.pyplot as plt
 
-def sarsa(
-        env, gamma, alpha, epsilon, num_episodes, max_steps=np.inf,
-        initial_Q=None):
-    """
-      Estimates optimal policy by interacting with an environment using
-      a td-learning approach
-
-      parameters
-      ----------
-      env - an environment that can be reset and interacted with via step
-          (typically this might be an MDPSimulation object)
-      gamma - the geometric discount for calculating returns
-      alpha - the learning rate
-      epsilon - the epsilon to use with epsilon greedy policies
-      num_episodes - number of episode to run
-      max_steps (optional) - maximum number of steps per trace (to avoid very
-          long episodes)
-
-      returns
-      -------
-      policy - an estimate for the optimal policy
-      Q - a Q-function estimate of the output policy
-    """
-    num_states = env.num_states
-    num_actions = env.num_actions
-    if initial_Q is None:
-        Q = np.zeros((num_states, num_actions))
-    else:
-        Q = initial_Q
-    policy = get_epsilon_greedy_policy(epsilon, Q, env.absorbing)
-    for _ in range(num_episodes):
-        # reset state
-        s = env.reset()
-        # choose initial action
-        a = choose_from_policy(policy, s)
-
-        steps = 0
-        while not env.is_terminal() and steps < max_steps:
-            next_s, r = env.next(a)
-            # choose the next action
-            next_a = choose_from_policy(policy, s)
-            # get td_error (called delta on slides)
-            td_error = r + gamma * Q[next_s, next_a] - Q[s, a]
-            # update the Q function estimate
-            Q[s, a] += alpha * td_error
-            # update the policy (only need to do so for current state)
-            policy[s, :] = get_epsilon_greedy_policy(
-                epsilon, Q[s, :].reshape((1, num_actions)))
-            # set next state and action to current state and action
-            s = next_s
-            a = next_a
-            # increment the number of steps
-            steps += 1
-    # return the policy
-    return policy, Q
-
-
 def q_learning(
         env, gamma, alpha, epsilon, num_episodes, max_steps=np.inf,
         initial_Q=None):
