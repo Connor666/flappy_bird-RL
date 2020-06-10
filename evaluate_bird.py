@@ -1,11 +1,10 @@
 from flappy import FlappyBird
 import numpy as np
 import matplotlib.pyplot as plt
-from algorithms import sarsa
 from algorithms import q_learning
 
 def evaluate_learning(
-        sim,series_size=50, num_series=80, gamma=0.99, alpha=0.7,
+        sim,series_size=50, num_series=20, gamma=0.99, alpha=0.7,
         epsilon=0.0001):
     '''
     :param sim: The queuing object
@@ -15,8 +14,8 @@ def evaluate_learning(
     '''
     # initialise Q values
 
-    Q = 0*np.ones((sim.num_states,sim.num_actions))
-    #Q = np.load('save.npy')
+    #Q = 0*np.ones((sim.num_states,sim.num_actions))
+    Q = np.load('save.npy')
     print(Q.shape)
     figrew, axrew = plt.subplots()
     total_reward_seq = [0]
