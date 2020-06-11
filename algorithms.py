@@ -88,7 +88,6 @@ def get_epsilon_greedy_policy(epsilon, Q, absorbing=None):
 def get_greedy_policy(Q, absorbing=None):
     """
     Returns the greedy policy from a Q-function estimate
-
     parameters
     ----------
     Q - (num_states x num_actions) matrix of Q-function values

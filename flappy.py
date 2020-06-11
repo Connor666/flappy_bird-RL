@@ -7,7 +7,7 @@ from pygame.locals import *
 
 class FlappyBird:
     def __init__(self):
-        self.FPS = 1200 # you can increase this value and have a quicker training
+        self.FPS = 600 # you can increase this value and have a quicker training
         self.SCREENWIDTH  = 288
         self.SCREENHEIGHT = 512
         self.PIPEGAPSIZE  = 150 # gap between upper and lower part of pipe
