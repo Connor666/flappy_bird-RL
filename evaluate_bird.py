@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from algorithms import q_learning
 
 def evaluate_learning(
-        sim,series_size=50, num_series=20, gamma=0.99, alpha=0.7,
+        sim,series_size=50, num_series=5, gamma=0.99, alpha=0.7,
         epsilon=0.0001):
     '''
     :param sim: The queuing object
@@ -25,9 +25,9 @@ def evaluate_learning(
         print("series = %r/%d" % (series,num_series) ) # Print the current stage
         rewardlist=[]
         for episode in range(series_size):
-            policy, Q = q_learning(
+            Q = q_learning(
                 sim, gamma=gamma, alpha=alpha, epsilon=epsilon,
-                num_episodes=1, initial_Q=Q)
+                num_episodes=1, Qtable=Q)
             rewardlist.append(
                 sim.score)
             total_episodes += 1
@@ -41,9 +41,9 @@ def evaluate_learning(
         total_reward_seq)
     axrew.set_xlabel("episodes")
     axrew.set_ylabel("average score")
-    return policy
+    return
 
-policy=evaluate_learning(sim=FlappyBird())
+evaluate_learning(sim=FlappyBird())
 plt.title('Average score per series')
 plt.tight_layout()
 plt.show()

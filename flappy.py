@@ -268,10 +268,10 @@ class FlappyBird:
         if self.crashTest[0]:
             self.deltax = (self.lowerPipes[-2]['x'] - self.playerx)
             self.deltay = (self.lowerPipes[-2]['y'] - int(self.playery))
-            print('deltax: ', self.deltax, 'deltay: ', self.deltay)
-            print('pipLx: ', self.lowerPipes)
-            print('pipUx: ', self.upperPipes)
-            print('x: ', self.playerx, 'y: ', self.playery)
+            # print('deltax: ', self.deltax, 'deltay: ', self.deltay)
+            # print('pipLx: ', self.lowerPipes)
+            # print('pipUx: ', self.upperPipes)
+            # print('x: ', self.playerx, 'y: ', self.playery)
 
             return {
                 'y': self.playery,
